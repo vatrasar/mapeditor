@@ -37,5 +37,14 @@ def draw_all_basic_elements(map_size, hand_range, intruder_size, minimal_hand_ra
 
 
 def  draw_points(points_list,canvas:Canvas):
+
+    max=0
     for point in points_list:
-        create_circle(point.x,point.y,point.r,canvas,from_rgb(0,255,0))
+        if point.points>max:
+            max=point.points
+
+
+    for point in points_list:
+        color_b=255-int(255*(point.points/float(max)))
+        color_r=int(255*(point.points/float(max)))
+        create_circle(point.x,point.y,point.r,canvas,from_rgb(color_r,color_b,color_b))
