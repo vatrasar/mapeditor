@@ -50,7 +50,7 @@ class Gui():
         labInfo=tkinter.Label(check_value_pannel, textvariable=self.info_lab_text)
 
 
-        self.canvas = tkinter.Canvas(self.master, width=setting.map_size, height=setting.map_size)
+        self.canvas = tkinter.Canvas(self.master, width=setting.map_size_x, height=setting.map_size_y)
 
         #create buttons
         btn_add_points =tkinter.Button(add_point_pannel,text="Add points",command=self.btn_add_points)
@@ -79,7 +79,7 @@ class Gui():
 
 
         self.canvas.pack()
-        draw_all_basic_elements(setting.map_size,setting.r_of_LR,setting.intuder_size,setting.minimal_hand_range,self.canvas)
+        draw_all_basic_elements(setting.map_size_x,setting.map_size_y,setting.r_of_LR,setting.intuder_size,setting.minimal_hand_range,self.canvas)
 
         button_pannel.pack()
 
@@ -110,7 +110,7 @@ class Gui():
         self.draw_all_elements()
 
     def draw_all_elements(self):
-        draw_all_basic_elements(self.settings.map_size,self.settings.r_of_LR,self.settings.intuder_size,self.settings.minimal_hand_range,self.canvas)
+        draw_all_basic_elements(self.settings.map_size_x,self.settings.map_size_y,self.settings.r_of_LR,self.settings.intuder_size,self.settings.minimal_hand_range,self.canvas)
         draw_points(self.points_list,self.canvas)
 
     def click(self,event):
