@@ -16,3 +16,20 @@ def save_rewards(points_list:typing.List[PointsCell]):
     except Exception as exp:
         print(str(exp))
         return
+
+
+def load_rewards(points_list:typing):
+    try:
+
+        file_rewards = open("settingsFiles/rewards.txt", mode="r")
+        for record in file_rewards.readlines():
+
+            fields_list=record.split(" ")
+            points_list.append(PointsCell(int(fields_list[0]),int(fields_list[1]),int(fields_list[2]),int(fields_list[3])))
+
+
+
+
+    except Exception as exp:
+        print(str(exp))
+        return

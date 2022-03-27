@@ -2,7 +2,7 @@ import tkinter
 
 from actions import find_point_on_list, find_all_points_on_list
 from paint import draw_all_basic_elements, draw_points
-from save import save_rewards
+from save import save_rewards, load_rewards
 from tools.gui_tools import create_circle
 from tools.pointer_status import Pointer_status
 from tools.points_cell import PointsCell
@@ -81,6 +81,7 @@ class Gui():
 
 
         self.points_list:typing.List[PointsCell]=[]
+        load_rewards(self.points_list)
 
 
 
