@@ -1,6 +1,6 @@
 import tkinter
 
-from actions import find_point_on_list
+from actions import find_point_on_list, find_all_points_on_list
 from paint import draw_all_basic_elements, draw_points
 from save import save_rewards
 from tools.gui_tools import create_circle
@@ -38,6 +38,7 @@ class Gui():
         button_pannel=tkinter.PanedWindow(self.master)
         check_value_pannel=tkinter.PanedWindow(button_pannel)
         add_point_pannel=tkinter.PanedWindow(button_pannel)
+        save_pannel=tkinter.PanedWindow(button_pannel)
 
 
         #spin
@@ -53,9 +54,15 @@ class Gui():
         self.canvas = tkinter.Canvas(self.master, width=setting.map_size_x, height=setting.map_size_y)
 
         #create buttons
-        btn_add_points =tkinter.Button(add_point_pannel,text="Add points",command=self.btn_add_points)
-        buttonSave=tkinter.Button(button_pannel,text="Save",command=self.save)
-        buttonCheckValue =tkinter.Button(check_value_pannel, text="Check value", command=self.btn_check_value)
+        btn_add_points=tkinter.Button(add_point_pannel,text="Add points",command=self.btn_add_points)
+        buttonSave=tkinter.Button(save_pannel,text="Save",command=self.save)
+        buttonCheckValue=tkinter.Button(check_value_pannel, text="Check value", command=self.btn_check_value)
+        buttonDeletePoints=tkinter.Button(save_pannel, text="Delte Points", command=self.btn_delete_points)
+
+
+        #save panel
+        buttonSave.grid(column=0,row=1)
+        buttonDeletePoints.grid(column=0,row=0)
 
         #check value panel
         labInfo.grid(column=0,row=1)
@@ -66,7 +73,7 @@ class Gui():
         spin_box.grid(column=0,row=1)
 
         #main panel
-        buttonSave.grid(column=0,row=0,padx=10)
+        save_pannel.grid(column=0,row=0,padx=10)
         add_point_pannel.grid(column=2,row=0,padx=10)
         check_value_pannel.grid(column=1,row=0,padx=10)
 
@@ -100,6 +107,9 @@ class Gui():
     def btn_check_value(self):
         self.pointer_status=Pointer_status.CHECKING_VALUE
 
+    def btn_delete_points(self):
+        self.pointer_status=Pointer_status.DELETING_POINTS
+
     def btn_add_points(self):
         self.pointer_status=Pointer_status.ADDING_POINTS
 
@@ -107,6 +117,8 @@ class Gui():
         self.canvas.delete("all")
         if self.pointer_status==Pointer_status.ADDING_POINTS:
          create_circle(event.x,event.y,self.bursh_size,self.canvas,"red")
+        elif self.pointer_status==Pointer_status.DELETING_POINTS:
+            create_circle(event.x,event.y,self.bursh_size,self.canvas,"yellow")
         self.draw_all_elements()
 
     def draw_all_elements(self):
@@ -120,6 +132,11 @@ class Gui():
         elif self.pointer_status==Pointer_status.CHECKING_VALUE:
             point=find_point_on_list(self.points_list,event.x,event.y)
             self.info_lab_text.set("value: "+ str(point.points))
+        elif self.pointer_status==Pointer_status.DELETING_POINTS:
+            points_to_delete_list=find_all_points_on_list(self.points_list,event.x,event.y)
+            for point in points_to_delete_list:
+                self.points_list.remove(point)
+
 
 
 
