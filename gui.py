@@ -93,7 +93,7 @@ class Gui():
 
 
         self.points_list:typing.List[PointsCell]=[]
-        load_rewards(self.points_list)
+        load_rewards(self.points_list,self.box_range_right_down,self.box_range_left_down)
 
 
 
