@@ -61,3 +61,14 @@ def  draw_points(points_list,canvas:Canvas):
         color_b=255-int(255*(point.points/float(max)))
         color_r=int(255*(point.points/float(max)))
         create_circle(point.x,point.y,point.r,canvas,from_rgb(color_r,color_b,color_b))
+
+
+def draw_invisible_boxes(invisible_boxes_list,canvas):
+    max=0
+
+
+
+    for point in invisible_boxes_list:
+
+        create_circle(point.x,point.y,point.r,canvas,"grey")
+

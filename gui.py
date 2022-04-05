@@ -1,7 +1,7 @@
 import tkinter
 
 from actions import find_point_on_list, find_all_points_on_list
-from paint import draw_all_basic_elements, draw_points
+from paint import draw_all_basic_elements, draw_points, draw_invisible_boxes
 from save import save_rewards, load_rewards
 from tools.check import check_if_box_in_bondaries
 from tools.distance import get_2d_distance
@@ -66,6 +66,7 @@ class Gui():
         buttonCheckValue=tkinter.Button(check_value_pannel, text="Check value", command=self.btn_check_value)
         buttonDeletePoints=tkinter.Button(save_pannel, text="Delte Points", command=self.btn_delete_points)
         btn_range_boxes=tkinter.Button(hand_range_boxes_panel, text="Hand ranges", command=self.btn_boxes)
+        btn_invisible_boxes=tkinter.Button(hand_range_boxes_panel, text="invisible boxes ranges", command=self.btn_invisible)
 
 
         #save panel
@@ -82,6 +83,7 @@ class Gui():
 
         #panle with ranges
         btn_range_boxes.grid(column=0,row=0)
+        btn_invisible_boxes.grid(column=0,row=1)
 
         #main panel
         save_pannel.grid(column=0,row=0,padx=10)
@@ -93,7 +95,9 @@ class Gui():
 
 
         self.points_list:typing.List[PointsCell]=[]
-        load_rewards(self.points_list,self.box_range_right_down,self.box_range_left_down)
+        self.invisible_boxes_list=[]
+        self.ivisible_box_size=20
+        load_rewards(self.points_list,self.box_range_right_down,self.box_range_left_down,self.invisible_boxes_list)
 
 
 
@@ -112,12 +116,14 @@ class Gui():
 
 
 
+    def btn_invisible(self):
+        self.pointer_status=Pointer_status.INVISIBLE
     def btn_boxes(self):
         self.pointer_status=Pointer_status.RANGES_BOXES
         self.draw_all_elements()
 
     def save(self):
-        save_rewards(self.points_list,self.box_range_right_down[0],self.box_range_left_down[0])
+        save_rewards(self.points_list,self.box_range_right_down[0],self.box_range_left_down[0],self.invisible_boxes_list)
 
         self.master.destroy()
 
@@ -135,15 +141,20 @@ class Gui():
         self.draw_all_elements()
         if self.pointer_status==Pointer_status.ADDING_POINTS:
          create_circle(event.x,event.y,self.bursh_size,self.canvas,"red")
+        elif self.pointer_status==Pointer_status.INVISIBLE:
+            create_circle(event.x,event.y,self.ivisible_box_size,self.canvas,"grey")
         elif self.pointer_status==Pointer_status.DELETING_POINTS:
             create_circle(event.x,event.y,self.bursh_size,self.canvas,"yellow")
 
 
     def draw_all_elements(self):
         self.canvas.delete("all")
+        draw_invisible_boxes(self.invisible_boxes_list,self.canvas)
         draw_all_basic_elements(self.settings.map_size_x, self.settings.map_size_y, self.settings.r_of_LR, self.settings.intuder_size, self.settings.minimal_hand_range, self.canvas, self.box_range_right_down[0],self.box_range_left_down[0])
         if self.pointer_status!=Pointer_status.RANGES_BOXES:
+
             draw_points(self.points_list,self.canvas)
+
         if self.pointer_status==Pointer_status.RANGES_BOXES:
             color="black"
             if self.box_range_right_down[1]==1:
@@ -167,6 +178,9 @@ class Gui():
                 self.points_list.remove(point)
         elif self.pointer_status==Pointer_status.RANGES_BOXES:
             self.set_range_box(event)
+        elif self.pointer_status==Pointer_status.INVISIBLE:
+            if event.y>self.settings.intuder_size+self.ivisible_box_size:
+                self.invisible_boxes_list.append(PointsCell(event.x,event.y,self.ivisible_box_size,int(self.spin_value_points.get())))
 
         self.draw_all_elements()
 

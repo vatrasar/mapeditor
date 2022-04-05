@@ -6,3 +6,4 @@ class Pointer_status(Enum):
     ADDING_POINTS=2
     DELETING_POINTS=3
     RANGES_BOXES=4
+    INVISIBLE=5

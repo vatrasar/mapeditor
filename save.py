@@ -4,7 +4,7 @@ from tools.point import Point
 from tools.points_cell import PointsCell
 
 
-def save_rewards(points_list:typing.List[PointsCell],box_range_right_down,box_range_left_down):
+def save_rewards(points_list:typing.List[PointsCell],box_range_right_down,box_range_left_down,invisible_boxes:typing.List[PointsCell]):
 
     try:
 
@@ -17,13 +17,17 @@ def save_rewards(points_list:typing.List[PointsCell],box_range_right_down,box_ra
         file_boxes.write("%f %f\n"%(box_range_right_down.x,box_range_right_down.y))
         file_boxes.write("%f %f\n"%(box_range_left_down.x,box_range_left_down.y))
         file_boxes.close()
+        file_invisible = open("settingsFiles/invisible_boxes.txt", mode="w")
+        for point in invisible_boxes:
+            file_invisible.write("%d %d %d %d\n"%(point.x,point.y,point.r,point.points))
+
 
     except Exception as exp:
         print(str(exp))
         return
 
 
-def load_rewards(points_list:typing,box_range_right_down,box_range_left_down):
+def load_rewards(points_list:typing,box_range_right_down,box_range_left_down,invisible_boxes:typing.List[PointsCell]):
     try:
 
         file_rewards = open("settingsFiles/rewards.txt", mode="r")
@@ -47,6 +51,17 @@ def load_rewards(points_list:typing,box_range_right_down,box_range_left_down):
         print(str(exp))
         return
 
+
+    try:
+
+        file_invisible = open("settingsFiles/invisible_boxes.txt", mode="r")
+        for record in file_invisible.readlines():
+
+            fields_list=record.split(" ")
+            invisible_boxes.append(PointsCell(int(fields_list[0]),int(fields_list[1]),int(fields_list[2]),int(fields_list[3])))
+    except Exception as exp:
+        print(str(exp))
+        return
 
 
 
