@@ -119,6 +119,8 @@ class Settings():
             self.hand_max_deviation=self.check_int(property_value, property_name, 0, 1, True)
         elif (property_name=="T"):
             self.T=self.check_float(property_value,property_name,0,1,True)
+        elif (property_name=="visualisation_speed"):
+            self.visualisation_speed=self.check_int(property_value,property_name,0,1,True)
         elif (property_name=="jump_ratio"):
             self.jump_ratio=self.check_float(property_value,property_name,0,1,True)
         elif (property_name=="time_to_wait_after_jump"):
@@ -131,10 +133,13 @@ class Settings():
 
         elif (property_name=="mode"):
             property_value=property_value.strip()
-            if (property_value=="RW-RA"):
+            if (property_value in ["RW-RA","list","annealing"]):
                 self.mode=property_value
             else:
                 raise Exception("Błąd pliku konfiguracyjnego. %s może przyjmować wartości: RW-RA"%(property_name))
+        elif (property_name=="tier2_mode"):
+
+            self.tier2_mode=self.check_binary(property_value,property_name)
 
         elif (property_name=="prob_of_attack"):
 
@@ -212,3 +217,6 @@ class Settings():
 
         else:
             raise Exception("Błąd pliku konfiguracyjnego, nieznana nazwa właściwości:" +property_name)
+
+
+

@@ -174,8 +174,15 @@ class Gui():
             self.info_lab_text.set("value: "+ str(point.points))
         elif self.pointer_status==Pointer_status.DELETING_POINTS:
             points_to_delete_list=find_all_points_on_list(self.points_list,event.x,event.y)
+
             for point in points_to_delete_list:
                 self.points_list.remove(point)
+
+
+            points_to_delete_list=find_all_points_on_list(self.invisible_boxes_list,event.x,event.y)
+            for point in points_to_delete_list:
+                self.invisible_boxes_list.remove(point)
+
         elif self.pointer_status==Pointer_status.RANGES_BOXES:
             self.set_range_box(event)
         elif self.pointer_status==Pointer_status.INVISIBLE:
