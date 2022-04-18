@@ -5,7 +5,17 @@ from tools.point import Point
 import numpy as np
 
 def draw_all_basic_elements(map_size_x,map_size_y, hand_range, intruder_size, minimal_hand_range,canvas,left_box,right_box):
-    create_squer(0,0,map_size_x, intruder_size,canvas) # target
+
+    squer_bootm_start=0
+    squer_top_end=map_size_x/2.0
+
+
+
+    create_squer(squer_bootm_start,0,squer_top_end, intruder_size,canvas,"red")
+    squer_bootm_start=map_size_x/2.0
+    squer_top_end=map_size_x
+
+    create_squer(squer_bootm_start,0,squer_top_end, intruder_size,canvas,"blue")#target
     # create_circle(476,354,hand_size,self.canvas,"black") #marker
 
 
