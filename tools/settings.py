@@ -113,41 +113,6 @@ class Settings():
             else:
                 raise Exception("Błąd pliku konfiguracyjnego. %s może być 0,1,2,3 "%(property_name))
 
-        elif (property_name=="visualization"):
-            self.visualisation=self.check_int(property_value, property_name, 0, 3, False)
-        elif (property_name=="hand_max_deviation"):
-            self.hand_max_deviation=self.check_int(property_value, property_name, 0, 1, True)
-        elif (property_name=="T"):
-            self.T=self.check_float(property_value,property_name,0,1,True)
-        elif (property_name=="visualisation_speed"):
-            self.visualisation_speed=self.check_int(property_value,property_name,0,1,True)
-        elif (property_name=="jump_ratio"):
-            self.jump_ratio=self.check_float(property_value,property_name,0,1,True)
-        elif (property_name=="time_to_wait_after_jump"):
-            self.time_to_wait_after_jump=self.check_float(property_value,property_name,0,1,True)
-        elif (property_name=="beat_the_score"):
-            self.beat_the_score=self.check_float(property_value,property_name,0,1,True)
-
-        elif (property_name=="intruder_max_energy"):
-            self.intruder_max_energy=self.check_float(property_value,property_name,0,1,True)
-
-        elif (property_name=="mode"):
-            property_value=property_value.strip()
-            if (property_value in ["RW-RA","list","annealing"]):
-                self.mode=property_value
-            else:
-                raise Exception("Błąd pliku konfiguracyjnego. %s może przyjmować wartości: RW-RA"%(property_name))
-        elif (property_name=="tier2_mode"):
-
-            self.tier2_mode=self.check_binary(property_value,property_name)
-
-        elif (property_name=="prob_of_attack"):
-
-            self.prob_of_attack=self.check_float(property_value,property_name,0,1.1,False)
-        elif (property_name=="prob_of_return_to_T2"):
-
-            self.prob_of_return_to_T2=self.check_float(property_value,property_name,0,1,False)
-
         elif (property_name=="arrive_deterministic"):
 
             self.arrive_deterministic=self.check_binary(property_value,property_name)
@@ -216,7 +181,8 @@ class Settings():
             self.blind_angle=self.check_int(property_value,property_name,0,223,True)
 
         else:
-            raise Exception("Błąd pliku konfiguracyjnego, nieznana nazwa właściwości:" +property_name)
+            print("warning:proprety with unknown name in konf file")
+            return
 
 
 
