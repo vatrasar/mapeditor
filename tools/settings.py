@@ -81,7 +81,7 @@ class Settings():
         # self.simple_map_size = self.tier1_distance_from_intruder * 1.3
         # self.simple_dimension = int((self.map_size - (-self.map_size)) / self.simple_resolution)
         self.map_size_y=int(self.tier1_distance_from_intruder * 1.3)
-        self.map_size_x =self.map_size_y*2
+
         self.dodge_radius=self.uav_size*4
         self.save_distance=self.dodge_radius*2
         self.minimal_hand_range=self.intuder_size*1.3
@@ -137,6 +137,9 @@ class Settings():
         elif (property_name=="uav_size"):
 
             self.uav_size=self.check_float(property_value,property_name,0,1,True)
+
+        elif (property_name=="map_size_x"):
+            self.map_size_x=self.check_int(property_value, property_name,1,0,True)
 
         elif (property_name=="hand_size"):
 
