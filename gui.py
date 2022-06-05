@@ -117,8 +117,10 @@ class Gui():
 
 
     def btn_invisible(self):
+        self.draw_all_elements()
         self.pointer_status=Pointer_status.INVISIBLE
     def btn_boxes(self):
+        self.draw_all_elements()
         self.pointer_status=Pointer_status.RANGES_BOXES
         self.draw_all_elements()
 
@@ -128,12 +130,15 @@ class Gui():
         self.master.destroy()
 
     def btn_check_value(self):
+        self.draw_all_elements()
         self.pointer_status=Pointer_status.CHECKING_VALUE
 
     def btn_delete_points(self):
+        self.draw_all_elements()
         self.pointer_status=Pointer_status.DELETING_POINTS
 
     def btn_add_points(self):
+        self.draw_all_elements()
         self.pointer_status=Pointer_status.ADDING_POINTS
 
     def hover(self, event):
