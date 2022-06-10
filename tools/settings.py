@@ -84,7 +84,8 @@ class Settings():
         # self.simple_resolution=2
         # self.simple_map_size = self.tier1_distance_from_intruder * 1.3
         # self.simple_dimension = int((self.map_size - (-self.map_size)) / self.simple_resolution)
-        self.map_size_y=int(self.tier1_distance_from_intruder * 1.3)
+        self.tier1_distance_from_intruder=400
+        self.map_size_y=520
 
         self.dodge_radius=self.uav_size*4
         self.save_distance=self.dodge_radius*2
@@ -124,9 +125,6 @@ class Settings():
         elif (property_name=="lambda1"):
 
             self.lambda1=self.check_float(property_value,property_name,0,1,True)
-        elif (property_name=="tier1_distance_from_intruder"):
-
-            self.tier1_distance_from_intruder=self.check_float(property_value,property_name,0,1,True)
 
         elif (property_name=="v_of_uav"):
 
