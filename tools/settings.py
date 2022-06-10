@@ -91,6 +91,7 @@ class Settings():
         self.minimal_hand_range=self.intuder_size*1.3
         self.intruder_time_of_reaction=1.0
         self.minimal_travel_time=0.2
+        self.map_size_x=1040
         logging.info("properties correct")
         return setting_dict
 
@@ -141,10 +142,6 @@ class Settings():
         elif (property_name=="uav_size"):
 
             self.uav_size=self.check_float(property_value,property_name,0,1,True)
-
-        elif (property_name=="map_size_x"):
-            self.map_size_x=self.check_int(property_value, property_name,1,0,True)
-
         elif (property_name=="hand_size"):
 
             self.hand_size=self.check_float(property_value,property_name,0,1,True)
