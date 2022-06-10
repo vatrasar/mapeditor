@@ -11,7 +11,7 @@ def save_rewards(points_list:typing.List[PointsCell],box_range_right_down,box_ra
         file_rewards = open("settingsFiles/rewards.txt", mode="w")
         file_rewards.write("# x y point_range reward\n")
         for point in points_list:
-            file_rewards.write("%d %d %d %d\n"%(point.x,point.y,point.r,point.points))
+            file_rewards.write("%d %d %d %.2f\n"%(point.x,point.y,point.r,point.points))
 
         file_rewards.close()
         file_boxes = open("settingsFiles/boxes.txt", mode="w")
@@ -36,7 +36,10 @@ def load_rewards(points_list:typing,box_range_right_down,box_range_left_down,inv
             if record[0]=="#":
                 continue
             fields_list=record.split(" ")
-            points_list.append(PointsCell(int(fields_list[0]),int(fields_list[1]),int(fields_list[2]),int(fields_list[3])))
+            fields_list=list(filter("".__ne__,fields_list))
+            for i,field in enumerate(fields_list):
+                fields_list[i]=field.strip("\n")
+            points_list.append(PointsCell(int(fields_list[0]),int(fields_list[1]),int(fields_list[2]),float(fields_list[3])))
     except Exception as exp:
         print(str(exp))
         return
