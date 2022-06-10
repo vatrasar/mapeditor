@@ -3,9 +3,10 @@ import typing
 from tools.point import Point
 from tools.points_cell import PointsCell
 
-
+def sort_fun(element):
+    return element.x
 def save_rewards(points_list:typing.List[PointsCell],box_range_right_down,box_range_left_down,invisible_boxes:typing.List[PointsCell]):
-
+    points_list.sort(key=sort_fun)
     try:
 
         file_rewards = open("settingsFiles/rewards.txt", mode="w")
