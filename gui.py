@@ -64,7 +64,7 @@ class Gui():
         btn_add_points=tkinter.Button(add_point_pannel,text="Add points",command=self.btn_add_points)
         buttonSave=tkinter.Button(save_pannel,text="Save",command=self.save)
         buttonCheckValue=tkinter.Button(check_value_pannel, text="Check value", command=self.btn_check_value)
-        buttonDeletePoints=tkinter.Button(save_pannel, text="Delte Points", command=self.btn_delete_points)
+        buttonDeletePoints=tkinter.Button(save_pannel, text="Delete Points", command=self.btn_delete_points)
         btn_range_boxes=tkinter.Button(hand_range_boxes_panel, text="Hand ranges", command=self.btn_boxes)
         btn_invisible_boxes=tkinter.Button(hand_range_boxes_panel, text="invisible boxes ranges", command=self.btn_invisible)
 
